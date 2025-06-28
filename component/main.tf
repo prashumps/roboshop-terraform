@@ -1,3 +1,11 @@
+terraform {
+  required_providers {
+    null = {
+      source  = "hashicorp/null"
+      version = "3.2.3"
+    }
+  }
+}
 resource "azurerm_network_interface" "privateip" {
   name                = var.name
   location            = var.location
@@ -51,6 +59,22 @@ resource "azurerm_virtual_machine" "vm" {
 
   os_profile_linux_config {
     disable_password_authentication = false
+  }
+}
+
+resource "null_resource" "ansible" {
+  connection {
+    type     = "ssh"
+    user     = "azuser"
+    password = "Devops@123456"
+    host     = azurerm_network_interface.privateip.id
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "sudo dnf install python3.12 python3.12-pip -y",
+      "sudo pip3.12 install ansible",
+    ]
   }
 }
 
