@@ -67,7 +67,7 @@ resource "null_resource" "ansible" {
     type     = "ssh"
     user     = "azuser"
     password = "Devops@123456"
-    host     = azurerm_network_interface.privateip.id
+    host     = azurerm_network_interface.privateip.private_ip_address
   }
 
   provisioner "remote-exec" {
