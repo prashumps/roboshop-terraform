@@ -18,6 +18,11 @@ resource "azurerm_public_ip" "publicip" {
   allocation_method   = "Static"
 }
 
+resource "azurerm_network_interface_security_group_association" "nsg-attach" {
+  network_interface_id      = azurerm_network_interface.privateip.id
+  network_security_group_id = var.network_security_group_id
+}
+
 resource "azurerm_virtual_machine" "vm" {
   name                  = var.name
   location              = var.location

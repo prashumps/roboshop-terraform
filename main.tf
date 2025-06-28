@@ -6,6 +6,7 @@ module "frontend" {
   rg_name                       = var.rg_name
   storage_image_reference_id    = var.storage_image_reference_id
   zone_name                     = var.zone_name
+  network_security_group_id     = var.network_security_group_id
 }
 
 module "mongodb" {
@@ -16,6 +17,7 @@ module "mongodb" {
   rg_name                       = var.rg_name
   storage_image_reference_id    = var.storage_image_reference_id
   zone_name                     = var.zone_name
+  network_security_group_id     = var.network_security_group_id
 }
 
 module "mysql" {
@@ -26,6 +28,7 @@ module "mysql" {
   rg_name                       = var.rg_name
   storage_image_reference_id    = var.storage_image_reference_id
   zone_name                     = var.zone_name
+  network_security_group_id     = var.network_security_group_id
 }
 
 module "rabbitmq" {
@@ -36,6 +39,7 @@ module "rabbitmq" {
   rg_name                       = var.rg_name
   storage_image_reference_id    = var.storage_image_reference_id
   zone_name                     = var.zone_name
+  network_security_group_id     = var.network_security_group_id
 }
 
 module "redis" {
@@ -46,6 +50,7 @@ module "redis" {
   rg_name                       = var.rg_name
   storage_image_reference_id    = var.storage_image_reference_id
   zone_name                     = var.zone_name
+  network_security_group_id     = var.network_security_group_id
 }
 
 module "catalogue" {
@@ -56,6 +61,7 @@ module "catalogue" {
   rg_name                       = var.rg_name
   storage_image_reference_id    = var.storage_image_reference_id
   zone_name                     = var.zone_name
+  network_security_group_id     = var.network_security_group_id
 }
 
 module "cart" {
@@ -66,6 +72,7 @@ module "cart" {
   rg_name                       = var.rg_name
   storage_image_reference_id    = var.storage_image_reference_id
   zone_name                     = var.zone_name
+  network_security_group_id     = var.network_security_group_id
 }
 
 module "user" {
@@ -76,6 +83,7 @@ module "user" {
   rg_name                       = var.rg_name
   storage_image_reference_id    = var.storage_image_reference_id
   zone_name                     = var.zone_name
+  network_security_group_id     = var.network_security_group_id
 }
 
 module "shipping" {
@@ -86,6 +94,7 @@ module "shipping" {
   rg_name                       = var.rg_name
   storage_image_reference_id    = var.storage_image_reference_id
   zone_name                     = var.zone_name
+  network_security_group_id     = var.network_security_group_id
 }
 
 module "payment" {
@@ -96,16 +105,6 @@ module "payment" {
   rg_name                       = var.rg_name
   storage_image_reference_id    = var.storage_image_reference_id
   zone_name                     = var.zone_name
+  network_security_group_id     = var.network_security_group_id
 }
 
-# resource "azurerm_resource_group" "example" {
-#   name     = "${var.prefix}-resources"
-#   location = "West Europe"
-# }
-
-# resource "azurerm_virtual_network" "main" {
-#   name                = "${var.prefix}-network"
-#   address_space       = ["10.0.0.0/16"]
-#   location            = azurerm_resource_group.example.location
-#   resource_group_name = azurerm_resource_group.example.name
-# }
