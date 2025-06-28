@@ -56,3 +56,4 @@ resource "azurerm_dns_a_record" "dns_record" {
   ttl                 = 3
   records             = [azurerm_network_interface.privateip.private_ip_address]
 }
+
