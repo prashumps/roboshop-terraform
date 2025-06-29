@@ -6,6 +6,14 @@ terraform {
     }
   }
 }
+
+resource "azurerm_public_ip" "publicip" {
+  name                = var.name
+  resource_group_name = var.rg_name
+  location            = var.location
+  allocation_method   = "Static"
+}
+
 resource "azurerm_network_interface" "privateip" {
   name                = var.name
   location            = var.location
@@ -17,13 +25,6 @@ resource "azurerm_network_interface" "privateip" {
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.publicip.id
   }
-}
-
-resource "azurerm_public_ip" "publicip" {
-  name                = var.name
-  resource_group_name = var.rg_name
-  location            = var.location
-  allocation_method   = "Static"
 }
 
 resource "azurerm_network_interface_security_group_association" "nsg-attach" {
@@ -63,6 +64,9 @@ resource "azurerm_virtual_machine" "vm" {
 }
 
 resource "null_resource" "ansible" {
+  depends_on = [
+    azurerm_virtual_machine.vm
+  ]
   connection {
     type     = "ssh"
     user     = "azuser"
