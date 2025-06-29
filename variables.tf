@@ -21,3 +21,23 @@ variable "rg_name" {
 variable "network_security_group_id" {
   default = "/subscriptions/fce3d656-0949-412a-9e49-d5c96a4783c9/resourceGroups/project-setup/providers/Microsoft.Network/networkSecurityGroups/project-setup-allow-all"
 }
+
+variable "databases" {
+  default = {
+      mongodb = {}
+      rabbitmq = {}
+      mysql = {}
+      redis = {}
+    }
+}
+
+variable "applications" {
+  default = {
+    frontend = {}
+    catalogue = {}
+    cart = {}
+    shipping = {}
+    payment = {}
+    user = {}
+  }
+}
