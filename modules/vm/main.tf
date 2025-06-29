@@ -10,13 +10,13 @@ terraform {
 resource "azurerm_public_ip" "publicip" {
   name                = var.name
   resource_group_name = var.rg_name
-  location            = data.azurerm_resource_group.rg.location
+  location            = var.rg_location
   allocation_method   = "Static"
 }
 
 resource "azurerm_network_interface" "privateip" {
   name                = var.name
-  location            = data.azurerm_resource_group.rg.location
+  location            = var.rg_location
   resource_group_name = var.rg_name
 
   ip_configuration {
@@ -34,7 +34,7 @@ resource "azurerm_network_interface_security_group_association" "nsg-attach" {
 
 resource "azurerm_virtual_machine" "vm" {
   name                  = var.name
-  location              = data.azurerm_resource_group.rg.location
+  location              = var.rg_location
   resource_group_name   = var.rg_name
   network_interface_ids = [azurerm_network_interface.privateip.id]
   vm_size               = "Standard_B2s"
@@ -74,19 +74,19 @@ resource "null_resource" "ansible" {
     host     = azurerm_network_interface.privateip.private_ip_address
   }
 
-  # provisioner "remote-exec" {
-  #   inline = [
-  #     "sudo dnf install python3.12 python3.12-pip -y",
-  #     "sudo pip3.12 install ansible",
-  #     "ansible-pull -i localhost, -U https://github.com/prashump/roboshop-ansible roboshop.yml -e app_name=${var.name}"
-  #   ]
-  # }
+  provisioner "remote-exec" {
+    inline = [
+      "sudo dnf install python3.12 python3.12-pip -y",
+      "sudo pip3.12 install ansible",
+      "ansible-pull -i localhost, -U https://github.com/prashump/roboshop-ansible roboshop.yml -e app_name=${var.name}"
+    ]
+  }
 }
 
 resource "azurerm_dns_a_record" "dns_record" {
   name                = "${var.name}-dev"
   zone_name           = var.zone_name
-  resource_group_name = var.rg_name
+  resource_group_name = var.dns_record_rg_name
   ttl                 = 3
   records             = [azurerm_network_interface.privateip.private_ip_address]
 }
