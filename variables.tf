@@ -10,10 +10,6 @@ variable "zone_name" {
   default = "prashumps.online"
 }
 
-variable "location" {
-  default = "UK West"
-}
-
 variable "rg_name" {
   default = "project-setup"
 }

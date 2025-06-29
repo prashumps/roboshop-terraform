@@ -10,13 +10,13 @@ terraform {
 resource "azurerm_public_ip" "publicip" {
   name                = var.name
   resource_group_name = var.rg_name
-  location            = var.location
+  location            = data.azurerm_resource_group.rg.location
   allocation_method   = "Static"
 }
 
 resource "azurerm_network_interface" "privateip" {
   name                = var.name
-  location            = var.location
+  location            = data.azurerm_resource_group.rg.location
   resource_group_name = var.rg_name
 
   ip_configuration {
@@ -34,7 +34,7 @@ resource "azurerm_network_interface_security_group_association" "nsg-attach" {
 
 resource "azurerm_virtual_machine" "vm" {
   name                  = var.name
-  location              = var.location
+  location              = data.azurerm_resource_group.rg.location
   resource_group_name   = var.rg_name
   network_interface_ids = [azurerm_network_interface.privateip.id]
   vm_size               = "Standard_B2s"
