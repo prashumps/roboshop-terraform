@@ -77,7 +77,7 @@ resource "azurerm_virtual_machine" "vm" {
 #   provisioner "remote-exec" {
 #     inline = [
 #       "sudo dnf install python3.12 python3.12-pip -y",
-#       "sudo pip3.12 install ansible",
+#       "sudo pip3.12 install ansible hvac",
 #       "ansible-pull -i localhost, -U https://github.com/prashump/roboshop-ansible roboshop.yml -e app_name=${var.name}"
 #     ]
 #   }
