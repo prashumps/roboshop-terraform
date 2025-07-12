@@ -37,7 +37,6 @@ resource "null_resource" "external-secrets-secret-store" {
   depends_on = [
     helm_release.external-secrets
   ]
-
   provisioner "local-exec" {
     command = <<TF
 kubectl apply -f - <<KUBE
@@ -57,13 +56,13 @@ spec:
           key: "token"
           namespace: devops
 ---
-appVersion: v1
+apiVersion: v1
 kind: Secret
 metadata:
   name: vault-token
   namespace: devops
 data:
-  token:  ${base64encode(var.token)}
+  token: ${base64encode(var.token)}
 KUBE
 TF
   }
