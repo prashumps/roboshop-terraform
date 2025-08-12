@@ -46,8 +46,8 @@ rg_name = {
   }
 }
 
-aks = {
-  main-dev = {
-    rgname = "ukwest"
-  }
-}
+# aks = {
+#   main-dev = {
+#     rgname = "ukwest"
+#   }
+# }
