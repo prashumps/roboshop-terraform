@@ -8,7 +8,7 @@ resource "azurerm_kubernetes_cluster" "main" {
     name       = "default"
     node_count = 1
     vm_size    = "Standard_D2_v2"
-    # vnet_subnet_id = "/subscriptions/fce3d656-0949-412a-9e49-d5c96a4783c9/resourceGroups/project-setup/providers/Microsoft.Network/virtualNetworks/project-setup-network/subnets/default"
+    vnet_subnet_id = "/subscriptions/fce3d656-0949-412a-9e49-d5c96a4783c9/resourceGroups/project-setup/providers/Microsoft.Network/virtualNetworks/project-setup-network/subnets/default"
   }
 
   identity {
