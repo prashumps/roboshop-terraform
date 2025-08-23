@@ -34,6 +34,10 @@ resource "helm_release" "external-secrets" {
 }
 
 resource "null_resource" "external-secrets-secret-store" {
+  triggers = {
+    always_run = timestamp()
+  }
+
   depends_on = [
     helm_release.external-secrets
   ]
