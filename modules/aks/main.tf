@@ -6,9 +6,9 @@ resource "azurerm_kubernetes_cluster" "main" {
 
   default_node_pool {
     name       = "default"
-    node_count = 2
-    vm_size    = "Standard_D2_v2"
-    vnet_subnet_id = "/subscriptions/fce3d656-0949-412a-9e49-d5c96a4783c9/resourceGroups/project-setup/providers/Microsoft.Network/virtualNetworks/project-setup-network/subnets/default"
+    node_count = var.default_node_pool["nodes"]
+    vm_size    = var.default_node_pool["vm_size"]
+    vnet_subnet_id = var.vnet_subnet_id
   }
 
   identity {
@@ -16,7 +16,7 @@ resource "azurerm_kubernetes_cluster" "main" {
   }
 
   aci_connector_linux {
-    subnet_name = "/subscriptions/fce3d656-0949-412a-9e49-d5c96a4783c9/resourceGroups/project-setup/providers/Microsoft.Network/virtualNetworks/project-setup-network/subnets/default"
+    subnet_name = var.vnet_subnet_id
   }
 
   network_profile {
@@ -25,4 +25,15 @@ resource "azurerm_kubernetes_cluster" "main" {
     dns_service_ip = "10.100.0.10"
   }
 
+}
+
+resource "azurerm_kubernetes_cluster_node_pool" "main" {
+  for_each              = var.app_node_pool
+  name                  = each.key
+  kubernetes_cluster_id = azurerm_kubernetes_cluster.main.id
+  vm_size               = each.value["vm_size"]
+  node_count            = each.value["min_count"]
+  max_count             = each.value["max_count"]
+  min_count             = each.value["min_count"]
+  auto_scaling_enabled  = each.value["auto_scaling_enabled"]
 }
