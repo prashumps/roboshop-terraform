@@ -62,7 +62,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: vault-token
-  namespace: devopss
+  namespace: devops
 data:
   token: ${base64encode(var.token)}
 KUBE
