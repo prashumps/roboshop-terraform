@@ -58,7 +58,7 @@ aks = {
       one = {
         vm_size               = "Standard_D2_v2"
         max_count             = 10
-        min_count             = 1
+        min_count             = 2
         auto_scaling_enabled  = true
       }
     }
