@@ -12,7 +12,7 @@ jobs:
         uses: hashicorp/vault-action@v2
         with:
           url: https://vault-int.prashumps.online:8200
-          token: ${{ secrets.VAULT_TOKEN }}
+          token: ${{ secrets.vault_token }}
           secrets: |
             roboshop-infra/data/azure-sp ARM_CLIENT_ID | ARM_CLIENT_ID ;
             roboshop-infra/data/azure-sp ARM_CLIENT_SECRET | ARM_CLIENT_SECRET ;
