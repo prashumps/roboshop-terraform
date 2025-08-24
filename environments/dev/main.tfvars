@@ -60,6 +60,9 @@ aks = {
         max_count             = 10
         min_count             = 2
         auto_scaling_enabled  = true
+        node_labels            = {
+          "project/name" = "roboshop"
+        }
       }
     }
   }
