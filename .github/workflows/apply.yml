@@ -6,7 +6,9 @@ jobs:
     env:
       vault_token: ${{ secrets.vault_token }}
     steps:
+      - uses: actions/checkout@v5
       - name: Terraform Apply
         run: |
+          ls -l 
           make dev-apply token=${vault_token}
 
