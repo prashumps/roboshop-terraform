@@ -1,0 +1,36 @@
+name: sample CICD
+on: [push, workflow_dispatch]
+jobs:
+  Build:
+    runs-on: self-hosted
+    steps:
+      - run: echo OK
+  Test:
+    needs: Build
+    runs-on: self-hosted
+    steps:
+      - run: echo OK
+  Dev_Deploy:
+    environment: DEV
+    needs: Test
+    runs-on: self-hosted
+    steps:
+      - run: echo OK
+  Qa_Deploy:
+    environment: QA
+    needs: Dev_Deploy
+    runs-on: self-hosted
+    steps:
+      - run: echo OK
+  Uat_Deploy:
+    environment: UAT
+    needs: Qa_Deploy
+    runs-on: self-hosted
+    steps:
+      - run: echo OK
+  Prod_Deploy:
+    environment: PROD
+    needs: Uat_Deploy
+    runs-on: self-hosted
+    steps:
+      - run: echo OK
