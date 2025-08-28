@@ -25,3 +25,4 @@ jobs:
           export ARM_TENANT_ID="${{ env.ARM_TENANT_ID }}"
           export ARM_SUBSCRIPTION_ID="${{ env.ARM_SUBSCRIPTION_ID }}"
           make dev-apply token=${vault_token}
+
