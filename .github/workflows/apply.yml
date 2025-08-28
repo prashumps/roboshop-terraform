@@ -3,6 +3,9 @@ on: [workflow_dispatch]
 jobs:
   TerraformApply:
     runs-on: self-hosted
+#    concurrency:
+#      group: terraform-dev        # only Dev jobs serialize
+#      cancel-in-progress: false
     env:
       vault_token: ${{ secrets.vault_token }}
     steps:
